@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('/user/login', 'Api\UserProfileController@login');
+Route::post('/user/login', 'Api\UserProfileController@login')->middleware('auth:api');
 Route::post('/user/register', 'Api\UserProfileController@register');
 Route::get('/user/{id}', 'Api\UserProfileController@get');
 Route::get('/user', 'Api\UserProfileController@filter');
