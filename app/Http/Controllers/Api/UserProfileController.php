@@ -80,7 +80,7 @@ class UserProfileController extends Controller {
 
         $profile = UserProfile::query()->with(['user'])->where('id', $id)->get()->first();
 
-        $resource = new Item($profile, function(UserProfile $profile) {
+        $resource = $profile ? new Item($profile, function(UserProfile $profile) {
             return [
                 'id'      => (int) $profile->id,
                 'first_name'    => $profile->first_name,
@@ -90,7 +90,7 @@ class UserProfileController extends Controller {
                 'is_active'     => $profile->is_active == 1,
                 'is_super_user'     => $profile->is_super_user == 1,
             ];
-        });
+        }) : [];
 
         return response()->json($this->fractal->createData($resource)->toArray(), 200);
 

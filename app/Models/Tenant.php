@@ -8,14 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model {
     use Encryptable;
 
-    protected $encryptable = [
-        'name',
-        'email',
-        'phone',
-    ];
+    protected $encryptable = [ 'name', 'email', 'address', 'phone' ];
 
-    protected $fillable = [
-        'name', 'email', 'phone'
-    ];
+    protected $fillable = [ 'name', 'email', 'address', 'phone' ];
 
 }

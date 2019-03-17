@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\UserProfile;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -20,20 +21,15 @@ use GuzzleHttp\Psr7\Request as GRequest;
 
 class UserController extends Controller {
 
-
     public function login() {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if (request('grant_type') == 'client_credentials' || Auth::attempt(['email' => request('username'), 'password' => request('password')])) {
             $client = new Client();
-            $body = [
-                'username'=>request('username'),
-                'password'=>request('password'),
-                'client_id'=>request('client_id'),
-                'grant_type'=>request('grant_type', 'password'),
-                'client_secret'=>request('client_secret')
-            ];
-            $request = new GRequest('POST', url('/').'/oauth/token');
-            $response = $client->send($request, ['form_params'=>$body]);
-            return response()->json($response->getBody(), $response->getStatusCode());
+            try {
+                $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
+            } catch (GuzzleException $e) {
+                return response()->json(json_decode((string)$e->getResponse()->getBody()), $e->getCode());
+            }
+            return $response;
         } else {
             return response()->json(["detail"=>"Invalid credentials"], 400);
         }

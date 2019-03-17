@@ -28,4 +28,8 @@ class UserProfile extends Model {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
+    public function tenant() {
+        return $this->belongsTo('App\Models\Tenant', 'tenant_id', 'id');
+    }
+
 }
