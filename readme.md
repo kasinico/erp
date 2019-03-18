@@ -4,7 +4,7 @@ Laravel Inventory Management System.
 
 ###### Work in progress.
 
-This project seeks to demonstrate how to build a REST api using Laravel. It encompasses the following:-
+This project seeks to demonstrate how to build a multi tenant REST api using Laravel. It encompasses the following:-
 
 >1. Standards compliant OAuth 2.0 Authentication using [Passport](https://laravel.com/docs/5.8/passport)
 >2. Encryption at the database level using [OpenSSL which provides AES-256 and AES-128 encryption](https://laravel.com/docs/5.8/encryption)
