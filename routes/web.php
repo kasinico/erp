@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{path?}', [
+    'uses' => function() {return view('admin');},
+    'as' => 'admin',
+    'where' => ['path' => '^((?!api).)*$']
+]);
