@@ -30,11 +30,30 @@ class ProductTypeController extends Controller
     }
 
     public function create() {
+        $type = new ProductType();
 
+        $profile = UserProfile::query()->whereHas('user', function ($q) {
+            return $q->where('user_id', auth('api')->id());
+        })->with(['tenant'])->first();
+        $type->create([
+            'name'  => request('name'),
+            'description'   => request('description')
+        ]);
+
+        $type->tenant()->associate($profile->tenant);
+
+        return response()->json(ProductTypeResource::make($type), 200);
     }
 
-    public function update() {
+    public function update($id) {
+        $type = ProductType::query()->where('id', $id)->with(['tenant'])->first();
 
+        if (!$type) return response()->json(['detail'=> 'Product Type of id '. $id .' was not found']);
+
+        $type->name = request('name', $type->name);
+        $type->description = request('description', $type->description);
+
+        return response()->json(ProductTypeResource::make($type));
     }
 
 }
