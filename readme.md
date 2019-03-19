@@ -2,7 +2,7 @@
 Laravel Inventory Management System.
 ====================================
 
-###### Work in progress.
+###### Work in progress....
 
 This project seeks to demonstrate how to build a multi tenant REST api using Laravel. It encompasses the following:-
 
