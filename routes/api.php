@@ -32,6 +32,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('tenant',       'Api\TenantController@create');
     Route::post('tenant/{id}',  'Api\TenantController@update');
 
+    /* Product Types */
+    Route::get('product_type',          'Api\ProductTypeController@filter');
+    Route::get('product_type/{id}',     'Api\ProductTypeController@get');
+    Route::post('product_type',         'Api\ProductTypeController@create');
+    Route::post('product_type/{id}',    'Api\ProductTypeController@update');
+
     /* Products */
     Route::get('product',       'Api\ProductController@filter');
     Route::get('product/{id}',  'Api\ProductController@get');
