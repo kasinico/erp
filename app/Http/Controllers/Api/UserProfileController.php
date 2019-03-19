@@ -2,25 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use League\Fractal;
-use League\Fractal\Manager;
-use League\Fractal\Resource\Item;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Serializer\ArraySerializer;
 
 class UserProfileController extends Controller {
-
-    private $fractal;
-
-    public function __construct() {
-        $this->fractal = new Manager();
-        $this->fractal->setSerializer(new ArraySerializer());
-    }
 
     /**
      * Display a listing of the resource.
@@ -72,27 +61,14 @@ class UserProfileController extends Controller {
         $profile->is_super_user = false;
         $profile->save();
 
-        $success['detail'] = "User registered succesfully";
-        return response()->json(['success'=>$success], 200);
+        return response()->json(UserResource::make($profile), 200);
     }
 
     public function get($id) {
 
         $profile = UserProfile::query()->with(['user'])->where('id', $id)->get()->first();
 
-        $resource = $profile ? new Item($profile, function(UserProfile $profile) {
-            return [
-                'id'      => (int) $profile->id,
-                'first_name'    => $profile->first_name,
-                'middle_name'   => $profile->middle_name,
-                'last_name'     => $profile->last_name,
-                'email'         => $profile->user->email,
-                'is_active'     => $profile->is_active == 1,
-                'is_super_user'     => $profile->is_super_user == 1,
-            ];
-        }) : [];
-
-        return response()->json($this->fractal->createData($resource)->toArray(), 200);
+        return response()->json($profile ? UserResource::make($profile) : [], 200);
 
     }
 
@@ -103,19 +79,7 @@ class UserProfileController extends Controller {
                 $q->where('user.id', request()->get('user'));
             });
 
-        $resource = new Collection($query->get(), function (UserProfile $profile) {
-            return [
-                'id'      => (int) $profile->id,
-                'first_name'    => $profile->first_name,
-                'middle_name'   => $profile->middle_name,
-                'last_name'     => $profile->last_name,
-                'email'         => $profile->user->email,
-                'is_active'     => $profile->is_active == 1,
-                'is_super_user'     => $profile->is_super_user == 1,
-            ];
-        });
-
-        return response()->json($this->fractal->createData($resource)->toArray(), 200);
+        return response()->json(UserResource::collection($query->get()), 200);
 
     }
 

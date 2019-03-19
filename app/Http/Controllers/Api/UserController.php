@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\TenantResource;
 use App\Models\UserProfile;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
@@ -64,8 +65,7 @@ class UserController extends Controller {
         $profile->is_super_user = false;
         $profile->save();
 
-        $success['detail'] = "User registered succesfully";
-        return response()->json(['success'=>$success], 200);
+        return response()->json(TenantResource::make($profile), 200);
     }
 
     public function get() {
