@@ -19,9 +19,11 @@ class UserResource extends Resource
             'first_name'    => $this->first_name,
             'middle_name'   => $this->middle_name,
             'last_name'     => $this->last_name,
-            'email'         => $this->email,
+            'email'         => $this->user->email,
+            'tenant_id'     => $this->tenant_id,
             'is_active'     => $this->is_active == 1,
-            'is_super_user' => $this->is_super_user == 1
+            'is_super_user' => $this->is_super_user == 1,
+            'tenant_name'   => $this->tenant->name,
         ];
     }
 }

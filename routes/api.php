@@ -22,6 +22,8 @@ Route::post('register', 'Api\UserProfileController@register');
 Route::post('login', 'Api\UserController@login');
 Route::middleware(['auth:api'])->group(function () {
 
+    Route::get('self', 'Api\UserProfileController@index');
+
     /* User End-Points */
     Route::get('/user',         'Api\UserProfileController@filter');
     Route::get('/user/{id}',    'Api\UserProfileController@get');

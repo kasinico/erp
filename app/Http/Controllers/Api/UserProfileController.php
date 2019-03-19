@@ -16,9 +16,12 @@ class UserProfileController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $profile = UserProfile::query()->whereHas('user', function ($q) {
+            return $q->where('user_id', auth('api')->id());
+        })->with(['user', 'tenant'])->first();
+
+        return response()->json($profile ? UserResource::make($profile) : [], 200);
     }
 
     /**
