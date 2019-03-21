@@ -63,7 +63,7 @@ module.exports = (env, argv) => {
                 // TODO Edit Production configurations
                 'env': {
                     'dir': '"/erp/public/admin"',
-                    'public_url': '"http://localhost/erp/public/"',
+                    'public_url': '"http://localhost:8080/erp/public/"',
                 },
             }),
         );
@@ -102,7 +102,7 @@ module.exports = (env, argv) => {
                 // TODO Edit dev configurations as per your preference.
                 'env': {
                     'dir': '"/erp/public/admin"',
-                    'public_url': '"http://localhost/erp/public/"',
+                    'public_url': '"http://localhost:8080/erp/public/"',
                 },
             }),
         )

@@ -15,8 +15,8 @@
         <link href="{{ asset("css/app.css") }}" rel="stylesheet" type="text/css">
     </head>
     <body data-gr-c-s-loaded="true">
-        <div class="container">
-            <main class="main h-100 w-100" id="app" > </main>
+        <div class="container-fluid">
+            <main  id="app" > </main>
         </div>
         <script type="text/javascript" src="{{ asset('js/bootstrap/bootstrap.min.js') }}" ></script>
         <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.slim.min.js') }}" ></script>
