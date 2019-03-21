@@ -4,6 +4,7 @@ import {Router, Route, browserHistory} from 'react-router';
 import Login from './login';
 import Menu from './menu';
 import Home from './home'
+import Products from './products';
 import ComingSoon from './coming_soon';
 
 function requireAuth() {
@@ -18,6 +19,7 @@ render(
             <Route path={`${env.dir}/login`} component={Login} />
             <Route component={Menu} onEnter={requireAuth()}>
                 <Route path={`${env.dir}`} component={Home} />
+                <Route path={`${env.dir}/products`} component={Products}/>
                 <Route path={`${env.dir}/*`} component={ComingSoon} />
             </Route>
         </Router>),

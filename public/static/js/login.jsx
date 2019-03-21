@@ -20,7 +20,7 @@ export default class Login extends React.Component {
         e.preventDefault();
         this.setState({processing_form: true, message: false});
         $.ajax({
-            url: `${env.public_url}/api/login`,
+            url: `${env.public_url}api/login`,
             dataType: 'json',
             method: 'post',
             data: {
@@ -30,17 +30,21 @@ export default class Login extends React.Component {
                 'username'      : this.refs.email.value,
                 'password'      : this.refs.password.value,
             },
-            error: function(xhr,status,error) {
+            error: function(xhr, status, error) {
                 var response = error;
-                try {
-                    response = xhr['responseJSON']['detail'];
-                } catch (e) {}
+                switch (xhr.status) {
+                    case 500:
+                        response = xhr['responseJSON']['message']
+                        break;
+                    default:
+                        response = xhr['responseJSON']['detail'];
+                }
                 this.setState({
                     message: true,
                     message_type: 'alert alert-danger',
                     response: response,
                     processing_form: false,
-                })
+                });
             }.bind(this),
             success: function (res) {
                 localStorage.setItem('erp_token', res.access_token);
@@ -82,7 +86,7 @@ export default class Login extends React.Component {
 
                 <div className="form-label-group">
                     <input type="password" ref="password" className="form-control" placeholder="Password"
-                            />
+                           autoComplete="new-password" />
                     <label htmlFor="inputPassword">Password</label>
                 </div>
                 {button}
