@@ -59,19 +59,11 @@ export default class Menu extends React.Component {
     render() {
         if (this.state.loading)
             return (
-                <div className="container h-100">
-                    <div className="container h-100">
-                        <div className="row h-100">
-                            <div className="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-                                <div className="d-table-cell align-middle">
-                                    <div className="text-center mt-4">
-                                        <ClipLoader color={'#cf2027'} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div className="text-center mt-4">
+                    <ClipLoader color={'#cf2027'} />
                 </div>
+
             );
         else
             return (
@@ -110,7 +102,7 @@ export default class Menu extends React.Component {
                                                 </a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/users`} onClick={this.handleNavigation.bind(this, '/users')}>
+                                                <a className="nav-link" href={`${env.public_url}admin/customers`} onClick={this.handleNavigation.bind(this, '/customers')}>
                                                     <span data-feather="users" />
                                                     Customers
                                                 </a>

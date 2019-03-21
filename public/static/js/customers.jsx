@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ComingSoon extends React.Component {
+export default class Customers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,12 @@ export default class ComingSoon extends React.Component {
         return (
             <div className="card">
                 <div className="card-header">
-                    <h2>Feature coming soon</h2>
+                    <div className="col-6">
+                        <h4>Customers</h4>
+                    </div>
+                </div>
+                <div className="card-body">
+
                 </div>
             </div>
         );
