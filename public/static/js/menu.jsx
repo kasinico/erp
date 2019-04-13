@@ -7,7 +7,7 @@ export default class Menu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: false,
             message: false,
             user: []
         }
@@ -15,7 +15,7 @@ export default class Menu extends React.Component {
 
     componentDidMount() {
         document.title = 'Dashboard';
-        this.fetchUser();
+        // this.fetchUser();
     }
 
     handleNavigation(path, e) {
@@ -56,6 +56,10 @@ export default class Menu extends React.Component {
         })
     }
 
+    toggleSidebar = (event) => {
+        $('#sidebar').toggleClass('active');
+    };
+
     render() {
         if (this.state.loading)
             return (
@@ -67,107 +71,68 @@ export default class Menu extends React.Component {
             );
         else
             return (
+
                 <React.Fragment>
-                    <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-                        <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{this.state.user.tenant_name}</a>
-                        <ul className="navbar-nav px-3">
-                            <li className="nav-item text-nowrap">
-                                <a className="nav-link" href="#">Sign out</a>
+
+                    {/*Sidebaar*/}
+                    <nav className='sidebar'>
+                        <div className='navbar-brand'>
+                            <h3>Laravel ERP</h3>
+                        </div>
+
+                        <ul className='list-unstyled components'>
+                            <li>
+                                <a href='#home' data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>
+                                    <i className='fa fa-home' /> Home
+                                </a>
+                                <ul className='collapse list-unstyled' id='home'>
+                                    <li>
+                                        <a href='#'>Home 1 <i className='fa fa-home' /></a>
+                                    </li>
+                                    <li>
+                                        <a href='#'>Home 2</a>
+                                    </li>
+                                    <li>
+                                        <a href='#'>Home 3</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href='#'>About</a>
+                            </li>
+                            <li>
+                                <a href='#page' data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Pages</a>
+                                <ul className='collapse list-unstyled' id='page'>
+                                    <li>
+                                        <a href='#'>Page 1</a>
+                                    </li>
+                                    <li>
+                                        <a href='#'>Page 2</a>
+                                    </li>
+                                    <li>
+                                        <a href='#'>Page 3</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href='#'>Portfolio</a>
+                            </li>
+                            <li>
+                                <a href='#'>Contacts</a>
                             </li>
                         </ul>
                     </nav>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-md-2">
-                                <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-                                    <div className="sidebar-sticky">
-                                        <ul className="nav flex-column">
-                                            <li className="nav-item">
-                                                <a className="nav-link active" href={`${env.public_url}admin`} onClick={this.handleNavigation.bind(this, '')}>
-                                                    <span data-feather="home" />
-                                                    {/*{feather.icons.home.toSvg}*/}
-                                                    Dashboard <span className="sr-only">(current)</span>
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/orders`} onClick={this.handleNavigation.bind(this, '/orders')}>
-                                                    <span data-feather="file" />
-                                                    Orders
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/products`} onClick={this.handleNavigation.bind(this, '/products')}>
-                                                    <span data-feather="shopping-cart" />
-                                                    Products
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/customers`} onClick={this.handleNavigation.bind(this, '/customers')}>
-                                                    <span data-feather="users" />
-                                                    Customers
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/reports`} onClick={this.handleNavigation.bind(this, '/reports')}>
-                                                    <span data-feather="bar-chart-2" />
-                                                    Reports
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href={`${env.public_url}admin/integrations`} onClick={this.handleNavigation.bind(this, '/integrations')}>
-                                                    <span data-feather="layers" />
-                                                    Integrations
-                                                </a>
-                                            </li>
-                                        </ul>
 
-                                        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                                            <span>Saved reports</span>
-                                            <a className="d-flex align-items-center text-muted" href="#">
-                                                <span data-feather="plus-circle" />
-                                            </a>
-                                        </h6>
-                                        <ul className="nav flex-column mb-2">
-                                            <li className="nav-item">
-                                                <a className="nav-link" href="#">
-                                                    <span data-feather="file-text" />
-                                                    Current month
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href="#">
-                                                    <span data-feather="file-text" />
-                                                    Last quarter
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href="#">
-                                                    <span data-feather="file-text" />
-                                                    Social engagement
-                                                </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" href="#">
-                                                    <span data-feather="file-text" />
-                                                    Year-end sale
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </nav>
+                    {/*Page Content*/}
+                    <div id='content'>
+                        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+                            <div className='container-fluid'>
+                                <button type='button' id='sidebarCollapse' className='btn btn-default' onClick={this.toggleSidebar}>
+                                    <i className='fas fa-align-left' />
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
                             </div>
-                            <div className="col-md-10 mt-5">
-                                {React.cloneElement(this.props.children, {
-                                    user: this.state.user,
-                                })}
-                            </div>
-
-                            {/*<div className="col-5">*/}
-                            {/*{React.cloneElement(this.props.children, {*/}
-                            {/*user: this.state.user,*/}
-                            {/*})}*/}
-                            {/*</div>*/}
-                        </div>
+                        </nav>
                     </div>
                 </React.Fragment>
             );

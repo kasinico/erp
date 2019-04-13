@@ -11,18 +11,15 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{ asset("css/app.css") }}" rel="stylesheet" type="text/css">
+        <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset("assets/css/app.css") }}" rel="stylesheet" type="text/css">
     </head>
     <body data-gr-c-s-loaded="true">
-        <div class="container-fluid">
-            <main  id="app" > </main>
-        </div>
-        <script type="text/javascript" src="{{ asset('js/bootstrap/bootstrap.min.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.slim.min.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/popper/popper.min.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/feather/feather-icons-4.9.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('static/bundles/admin.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+            <div class="wrapper"  id="app" > </div>
+        <script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.slim.min.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('assets/js/bootstrap/bootstrap.bundle.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
+
+            <script type="text/javascript" src="{{ asset('static/bundles/admin.js') }}" ></script>
     </body>
 </html>
