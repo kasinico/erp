@@ -57,7 +57,8 @@ export default class Menu extends React.Component {
     }
 
     toggleSidebar = (event) => {
-        $('#sidebar').toggleClass('active');
+        $('.sidebar, .content').toggleClass('active');
+
     };
 
     render() {
@@ -81,55 +82,29 @@ export default class Menu extends React.Component {
                         </div>
 
                         <ul className='list-unstyled components'>
+                            <li><a href='#'><i data-feather="home" />Dashboard</a></li>
+                            <li><a href='#'><i data-feather='file' /> Orders</a></li>
+                            <li><a href='#'><i data-feather='shopping-cart' /> Products</a> </li>
+                            <li><a href='#'><i data-feather='users' /> Customers</a></li>
+                            <li><a href='#'><i data-feather='bar-chart' /> Reports</a></li>
+                            <li><a href='#'><i data-feather='layers' /> Integrations</a></li>
                             <li>
-                                <a href='#home' data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>
-                                    <i className='fa fa-home' /> Home
-                                </a>
-                                <ul className='collapse list-unstyled' id='home'>
-                                    <li>
-                                        <a href='#'>Home 1 <i className='fa fa-home' /></a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>Home 2</a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>Home 3</a>
-                                    </li>
+                                <a href='#reports' data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Saved Reports</a>
+                                <ul className='collapse list-unstyled' id='reports'>
+                                    <li><a href='#'><i data-feather='file-text' /> Current month</a></li>
+                                    <li><a href='#'><i data-feather='file-text' /> Last quarter</a></li>
+                                    <li><a href='#'><i data-feather='file-text' /> Social</a></li>
                                 </ul>
-                            </li>
-                            <li>
-                                <a href='#'>About</a>
-                            </li>
-                            <li>
-                                <a href='#page' data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Pages</a>
-                                <ul className='collapse list-unstyled' id='page'>
-                                    <li>
-                                        <a href='#'>Page 1</a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>Page 2</a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>Page 3</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href='#'>Portfolio</a>
-                            </li>
-                            <li>
-                                <a href='#'>Contacts</a>
                             </li>
                         </ul>
                     </nav>
 
                     {/*Page Content*/}
-                    <div id='content'>
+                    <div className='content'>
                         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                             <div className='container-fluid'>
                                 <button type='button' id='sidebarCollapse' className='btn btn-default' onClick={this.toggleSidebar}>
                                     <i className='fas fa-align-left' />
-                                    <span className="navbar-toggler-icon"></span>
                                 </button>
                             </div>
                         </nav>

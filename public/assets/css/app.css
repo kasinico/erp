@@ -4,8 +4,15 @@
 
 body {
     font-family: sans-serif;
-    background: #fff;
+    font-size: .875rem;
+    background-color: #fff !important;
     color: #212529;
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
 }
 
 p {
@@ -24,7 +31,7 @@ a, a:hover, a:focus {
 
 .wrapper {
     display: flex;
-    align-items: stretch;
+    width: 100%;
 }
 
 .navbar-brand {
@@ -41,11 +48,14 @@ a, a:hover, a:focus {
 }
 
 .sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
-    background-color: #f8f9fa!important;
-    /*color: #fff;*/
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background-color: #f8f9fa !important;
+    color: #333;
     transition: all 0.3s;
 }
 
@@ -60,28 +70,32 @@ a, a:hover, a:focus {
 }
 
 .sidebar ul li a {
-    padding: .5rem 1.5rem;
-    font: 15px "Cerebri Sans",sans-serif;
+    padding: 8px 16px;
+    /*font: 500 15px "Cerebri Sans",sans-serif;*/
     display: block;
 }
 
+.sidebar ul li a .feather {
+    margin-right: 4px;
+    color: #999;
+}
+
 .sidebar ul li a:hover {
-    /*color: #7386D5;*/
-    background: #fff;
+    color: #12263F;
 }
 
 .sidebar.active {
-    margin-left: -250px;
+    margin-left: -200px;
 }
 
 .sidebar ul li.active > a, a[aria-expanded='true'] {
-    color: black;
-    background: rgba(0,0,0,.05);
+    color: #007bff;
+    /*background: rgba(0,0,0,.05);*/
 }
 
 ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
+    font-size: 13px !important;
+    padding-left: 60px !important;
     /*background: #6d7fcc;*/
 }
 
@@ -97,11 +111,39 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+.content {
+    width: calc(100% - 200px);
+    padding: 10px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.content.active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
 @media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
+    .sidebar {
+        margin-left: -200px;
     }
-    #sidebar.active {
+    .sidebar.active {
         margin-left: 0;
+    }
+    .content {
+        width: 100%;
+    }
+    .content.active {
+        width: calc(100% - 200px);
     }
 }
