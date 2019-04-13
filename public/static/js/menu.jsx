@@ -146,7 +146,7 @@ export default class Menu extends React.Component {
 
                     {/*Page Content*/}
                     <div className='content'>
-                        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+                        <nav className='navbar navbar-expand-lg navbar-light'>
                             <div className='container-fluid'>
                                 <button type='button' id='sidebarCollapse' className='btn btn-default' onClick={this.toggleSidebar}>
                                     <i className='fas fa-align-left' />

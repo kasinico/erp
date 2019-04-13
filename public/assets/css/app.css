@@ -131,6 +131,22 @@ a[data-toggle="collapse"] {
     padding-bottom: .25rem;
     border-bottom: 1px solid #e3ebf6;
 }
+
+.header-pretitle {
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #95aac9;
+}
+
+.header-title {
+    margin-bottom: 0;
+}
+
+.h1, h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.125rem;
+}
+
 .h2, h2 {
     font-size: 1.25rem;
 }
@@ -144,6 +160,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1.125rem;
     /*font-weight: 500;*/
     line-height: 1.1;
+}
+
+.h4, .h5, .h6, h4, h5, h6 {
+    margin-bottom: .5625rem;
 }
 
 h6.text-uppercase {
@@ -231,5 +251,11 @@ h6.text-uppercase {
     }
     .content.active {
         width: calc(100% - 200px);
+    }
+}
+
+@media (min-width: 768px) {
+    .h1 h1 {
+        font-size: 1.625rem;
     }
 }
