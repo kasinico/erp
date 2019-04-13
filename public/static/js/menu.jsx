@@ -66,8 +66,8 @@ export default class Menu extends React.Component {
     };
 
     static handleNavigation(path, e) {
-      e.preventDefault();
-      browserHistory.push(`${env.dir}${path}`)
+        e.preventDefault();
+        browserHistory.push(`${env.dir}${path}`)
     }
 
     render() {
@@ -125,18 +125,18 @@ export default class Menu extends React.Component {
                                 <a href={`#reports`} data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Saved Reports</a>
                                 <ul className='collapse list-unstyled' id='reports'>
                                     <li>
-                                        <a href={`${env.dir}`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                        <a href={`${env.dir}/month/:month`} onClick={Menu.handleNavigation.bind(this, '')}>
                                             <i data-feather='file-text' /> Current month
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={`${env.dir}`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                        <a href={`${env.dir}/quarter/:quarter`} onClick={Menu.handleNavigation.bind(this, '')}>
                                             <i data-feather='file-text' /> Last quarter
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={`${env.dir}`} onClick={Menu.handleNavigation.bind(this, '')}>
-                                            <i data-feather='file-text' /> Social
+                                        <a href={`${env.dir}/year/:year`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                            <i data-feather='file-text' /> Yearly
                                         </a>
                                     </li>
                                 </ul>
@@ -153,9 +153,15 @@ export default class Menu extends React.Component {
                                 </button>
                             </div>
                         </nav>
-                        {React.cloneElement(this.props.children, {
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <div className='col-12 col-lg-6 col-xl'>
+                                    {React.cloneElement(this.props.children, {
 
-                        })}
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </React.Fragment>
             );

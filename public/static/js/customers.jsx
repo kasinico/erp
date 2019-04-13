@@ -13,14 +13,28 @@ export default class Customers extends React.Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="card-header">
-                    <div className="col-6">
-                        <h4>Customers</h4>
+
+            <div className='card'>
+                <div className='header'>
+                    <div className='container-fluid'>
+                        <div className='header-body'>
+                            <div className='row align-items-end'>
+                                <div className='col'>
+                                    <h6 className="header-pretitle">Customer Listing</h6>
+                                    <h1 className='header-title'>Customers</h1>
+                                </div>
+                                <div className='col-auto'>
+                                    {/*<a href='#' className='btn btn-primary'>*/}
+                                    {/*    New Order*/}
+                                    {/*</a>*/}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="card-body">
-
+                <div className='card-body'>
+                    <div className='row align-items-center'>
+                    </div>
                 </div>
             </div>
         );
