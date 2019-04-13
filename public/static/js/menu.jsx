@@ -1,7 +1,7 @@
 import React from 'react';
 import {browserHistory} from "react-router";
 import {ClipLoader} from 'react-spinners';
-// const feather = require('feather-icons')
+import moment from 'moment';
 
 export default class Menu extends React.Component {
     constructor(props) {
@@ -17,11 +17,6 @@ export default class Menu extends React.Component {
         document.title = 'Dashboard';
         // this.fetchUser();
     }
-
-    // handleNavigation(path, e) {
-    //     e.preventDefault();
-    //     browserHistory.push(`${env.dir}`+path)
-    // }
 
     fetchUser() {
         $.ajax({
@@ -125,17 +120,20 @@ export default class Menu extends React.Component {
                                 <a href={`#reports`} data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Saved Reports</a>
                                 <ul className='collapse list-unstyled' id='reports'>
                                     <li>
-                                        <a href={`${env.dir}/month/:month`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                        <a href={`${env.dir}/reports/monthly/${moment().format('MMMM-Y')}`}
+                                           onClick={Menu.handleNavigation.bind(this, `/reports/monthly/${moment().format('MMMM-Y')}`)}>
                                             <i data-feather='file-text' /> Current month
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={`${env.dir}/quarter/:quarter`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                        <a href={`${env.dir}/reports/quarterly/${moment().format('MMMM-Y')}`}
+                                           onClick={Menu.handleNavigation.bind(this, `/reports/quarterly/${moment().format('MMMM-Y')}`)}>
                                             <i data-feather='file-text' /> Last quarter
                                         </a>
                                     </li>
                                     <li>
-                                        <a href={`${env.dir}/year/:year`} onClick={Menu.handleNavigation.bind(this, '')}>
+                                        <a href={`${env.dir}/reports/yearly/${moment().format('Y')}`}
+                                           onClick={Menu.handleNavigation.bind(this, `/reports/yearly/${moment().format('Y')}`)}>
                                             <i data-feather='file-text' /> Yearly
                                         </a>
                                     </li>
