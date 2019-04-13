@@ -128,7 +128,7 @@ a[data-toggle="collapse"] {
 
 .header-body {
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: .25rem;
     border-bottom: 1px solid #e3ebf6;
 }
 .h2, h2 {
