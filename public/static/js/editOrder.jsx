@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class EditProduct extends React.Component {
+export default class EditOrder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: []
+            order: []
         }
     }
 
@@ -19,18 +19,17 @@ export default class EditProduct extends React.Component {
                         <div className='header-body'>
                             <div className='row align-items-end'>
                                 <div className='col'>
-                                    <h6 className='header-pretitle'>Product Details</h6>
-                                    <h1 className='header-title'>{this.props.params.product ? `Edit ${this.state.product.name}` : 'New Product'}</h1>
+                                    <h6 className='header-pretitle'>Order Details</h6>
+                                    <h1 className='header-title'>{this.props.params.order ? `Edit ${this.state.order.name}` : 'New Order'}</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='card-body'>
-                    <div className='row align-items-center'>
-                    </div>
                 </div>
             </div>
         );
     }
+
 }

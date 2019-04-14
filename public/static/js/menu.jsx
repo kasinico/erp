@@ -152,8 +152,8 @@ export default class Menu extends React.Component {
                             </div>
                         </nav>
                         <div className='container-fluid'>
-                            <div className='row'>
-                                <div className='col-12 col-lg-6 col-xl'>
+                            <div className='row justify-content-center'>
+                                <div className='col-12'>
                                     {React.cloneElement(this.props.children, {
 
                                     })}
