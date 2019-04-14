@@ -8,6 +8,7 @@ import Products from './products';
 import Orders from './orders';
 import Customers from './customers';
 import ComingSoon from './coming_soon';
+import EditProduct from './editProduct';
 
 function requireAuth() {
     if (!localStorage.getItem('erp_token')) {
@@ -21,7 +22,13 @@ render(
             <Route path={`${env.dir}/login`} component={Login} />
             <Route component={Menu} onEnter={requireAuth()}>
                 <Route path={`${env.dir}`} component={Home} />
-                <Route path={`${env.dir}/products`} component={Products}/>
+
+                /* Products */
+                <Route path={`${env.dir}/products`}                 component={Products}/>
+                <Route path={`${env.dir}/products/new`}             component={EditProduct} />
+                <Route path={`${env.dir}/products/:product/edit`}   component={EditProduct} />
+
+                /* Orders */
                 <Route path={`${env.dir}/orders`} component={Orders}/>
                 <Route path={`${env.dir}/customers`} component={Customers}/>
                 <Route path={`${env.dir}/*`} component={ComingSoon} />

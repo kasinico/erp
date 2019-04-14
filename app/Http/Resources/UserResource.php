@@ -14,7 +14,7 @@ class UserResource extends Resource
      */
     public function toArray($request)
     {
-        return [
+        $response = [
             'id'        => (int) $this->id,
             'first_name'    => $this->first_name,
             'middle_name'   => $this->middle_name,
@@ -23,7 +23,9 @@ class UserResource extends Resource
             'tenant_id'     => $this->tenant_id,
             'is_active'     => $this->is_active == 1,
             'is_super_user' => $this->is_super_user == 1,
-            'tenant_name'   => $this->tenant->name,
+            'tenant_name'   => $this->tenant == null ? null : $this->tenant->name,
         ];
+
+        return $response;
     }
 }

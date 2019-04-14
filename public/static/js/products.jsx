@@ -1,5 +1,6 @@
 import React from 'react';
 import {ClipLoader} from "react-spinners";
+import {browserHistory} from "react-router";
 
 export default class Products extends React.Component {
     constructor(props) {
@@ -47,6 +48,11 @@ export default class Products extends React.Component {
         })
     }
 
+    handleNavigation = (path, e) => {
+        e.preventDefault();
+        browserHistory.push(`${env.dir}${path}`);
+    };
+
     render() {
         if (this.state.loading)
             return (
@@ -66,7 +72,9 @@ export default class Products extends React.Component {
                                     <h1 className='header-title'>Products</h1>
                                 </div>
                                 <div className='col-auto'>
-                                    <a href='#' className='btn btn-primary'>
+                                    <a href={`${env.dir}/products/new`}
+                                       onClick={this.handleNavigation.bind(this, '/products/new')}
+                                       className='btn btn-primary'>
                                         New Product
                                     </a>
                                 </div>

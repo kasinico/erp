@@ -29,10 +29,6 @@ class UserProfileController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
-    }
-
     public function register() {
         $validator = Validator::make(request()->all(), [
             'first_name' => 'required',
@@ -47,13 +43,13 @@ class UserProfileController extends Controller {
             return response()->json(['error'=>$validator->errors()], 401);
         }
 
-        $user = User::create([
+        $user = new User([
             'name' => '',
             'email' => request('email'),
             'password' => bcrypt(request('password'))
         ]);
 
-        $profile = UserProfile::create([
+        $profile = new UserProfile([
             'first_name'    => request('first_name'),
             'last_name' => request('last_name'),
             'middle_name'   => request('middle_name', null),
@@ -69,17 +65,20 @@ class UserProfileController extends Controller {
 
     public function get($id) {
 
-        $profile = UserProfile::query()->with(['user'])->where('id', $id)->get()->first();
+        $profile = UserProfile::query()->with(['user', 'tenant'])->where('id', $id)->get()->first();
 
         return response()->json($profile ? UserResource::make($profile) : [], 200);
-
     }
 
     public function filter() {
-        $query = UserProfile::query()->with(['user']);
+        $query = UserProfile::query()->with(['user', 'tenant']);
         if (request()->has('user'))
             $query->whereHas('user', function ($q) {
-                $q->where('user.id', request()->get('user'));
+                $q->where('user_id', request()->get('user'));
+            });
+        if (request()->has('tenant'))
+            $query->whereHas('tenant', function ($q) {
+                $q->where('tenant_id', request('tenant'));
             });
 
         return response()->json(UserResource::collection($query->get()), 200);

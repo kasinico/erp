@@ -15,7 +15,7 @@ export default class Menu extends React.Component {
 
     componentDidMount() {
         document.title = 'Dashboard';
-        // this.fetchUser();
+        this.fetchUser();
     }
 
     fetchUser() {
