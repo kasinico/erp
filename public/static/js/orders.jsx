@@ -100,7 +100,7 @@ export default class Orders extends React.Component {
         return (
 
             <div className='card'>
-                <div className='header mt-md-5'>
+                <div className='header mt-md-1'>
                     <div className='container-fluid'>
                         <div className='header-body'>
                             <div className='row align-items-center'>
@@ -152,7 +152,8 @@ export default class Orders extends React.Component {
                 <div className='card-body'>
                     <div className='row align-items-center'>
                         {React.cloneElement(this.props.children, {
-
+                            status: this.props.params.status,
+                            orders: this.state.orders
                         })}
                     </div>
                 </div>
