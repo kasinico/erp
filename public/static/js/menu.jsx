@@ -28,7 +28,7 @@ export default class Menu extends React.Component {
             },
             statusCode: {
                 401: function (xhr, status, error) {
-                    // browserHistory.push(`${env.dir}/login`)
+                    browserHistory.push(`${env.dir}/login`)
                 }
             },
             // error: function (xhr, status, error) {

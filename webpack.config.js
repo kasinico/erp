@@ -62,8 +62,8 @@ module.exports = (env, argv) => {
             new webpack.DefinePlugin({
                 // TODO Edit Production configurations
                 'env': {
-                    'dir': '"admin"',
-                    'public_url': '"http://laravel-erp.herokuapp.com"',
+                    'dir': '""',
+                    'public_url': '"https://laravel-erp.herokuapp.com"',
                 },
             }),
         );
@@ -101,8 +101,10 @@ module.exports = (env, argv) => {
             new webpack.DefinePlugin({
                 // TODO Edit dev configurations as per your preference.
                 'env': {
-                    'dir': '"/erp/public/admin"',
-                    'public_url': '"http://localhost:8080/erp/public/"',
+                    'dir': '""',
+                    'public_url': '"https://laravel-erp.herokuapp.com"',
+                    // 'dir': '"/erp/public/admin"',
+                    // 'public_url': '"http://localhost:8080/erp/public/"',
                 },
             }),
         )
