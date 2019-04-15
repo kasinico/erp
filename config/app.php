@@ -181,7 +181,7 @@ return [
          * Other Service Providers...
          */
         Laravel\Passport\PassportServiceProvider::class,
-//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
