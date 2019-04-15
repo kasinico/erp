@@ -121,26 +121,26 @@ export default class Orders extends React.Component {
                                     <ul className='nav nav-tabs nav-overflow header-tabs'>
                                         <li className='nav-item'>
                                             <a href={'#'} className={this.state.nav.all} onClick={this.gotToAll}>
-                                                All <span className='badge badge-pill badge-soft-secondary'>823</span>
+                                                All <span className='badge badge-pill badge-soft-secondary'>0</span>
                                             </a>
                                         </li>
                                         <li className='nav-item'>
                                             <a href={'#'} className={this.state.nav.complete} onClick={this.goToComplete}>
-                                                Complete <span className='badge badge-pill badge-soft-secondary'>72</span>
+                                                Complete <span className='badge badge-pill badge-soft-secondary'>0</span>
                                             </a>
                                         </li>
                                         <li className='nav-item'>
                                             <a href={'#'} className={this.state.nav.pending} onClick={this.goToPending}>
-                                                Pending <span className='badge badge-pill badge-soft-secondary'>24</span></a>
+                                                Pending <span className='badge badge-pill badge-soft-secondary'>0</span></a>
                                         </li>
                                         <li className='nav-item'>
                                             <a href={'#'} className={this.state.nav.processing} onClick={this.goToProcessing}>
-                                                Processing <span className='badge badge-pill badge-soft-secondary'>3</span>
+                                                Processing <span className='badge badge-pill badge-soft-secondary'>0</span>
                                             </a>
                                         </li>
                                         <li className='nav-item'>
                                             <a href={'#'} className={this.state.nav.refunded} onClick={this.goToRefunded}>
-                                                Refunded <span className='badge badge-pill badge-soft-secondary'>71</span>
+                                                Refunded <span className='badge badge-pill badge-soft-secondary'>0</span>
                                             </a>
                                         </li>
                                     </ul>

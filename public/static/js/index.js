@@ -11,11 +11,13 @@ import ComingSoon from './coming_soon';
 import EditProduct from './editProduct';
 import EditOrder from "./editOrder";
 import OrdersList from "./ordersList";
+import ProductsList from "./productList";
 
 
 function requireAuth() {
+    browserHistory.push(`${env.dir}/login`);
     if (!localStorage.getItem('erp_token')) {
-        browserHistory.push({pathname: `${env.dir}/login`, state: {nextPath: 'state' }});
+        browserHistory.push(`${env.dir}/login`);
     }
 }
 
@@ -27,9 +29,12 @@ render(
                 <Route path={`${env.dir}`} component={Home} />
 
                 /* Products */
-                <Route path={`${env.dir}/products`}                 component={Products}/>
-                <Route path={`${env.dir}/products/new`}             component={EditProduct} />
-                <Route path={`${env.dir}/products/:product/edit`}   component={EditProduct} />
+                <Route component={Products}>
+                    <Route path={`${env.dir}/products`}                 component={ProductsList}/>
+                    <Route path={`${env.dir}/products/:status`}         component={ProductsList}/>
+                </Route>
+                <Route path={`${env.dir}/products/product/new`}             component={EditProduct} />
+                <Route path={`${env.dir}/products/product/:product/edit`}   component={EditProduct} />
 
                 /* Orders */
                 <Route component={Orders}>

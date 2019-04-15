@@ -7,7 +7,7 @@ export default class Menu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            loading: true,
             message: false,
             user: []
         }
@@ -26,25 +26,34 @@ export default class Menu extends React.Component {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('erp_token')
             },
-            error: function (xhr, status, error) {
-                let response;
-                switch (status) {
-                    case 400:
-                        response = xhr['responseJSON']['detail'];
-                        break;
-                    case 500:
-                        response = error;
-                        break;
-                    default:
-                        response = xhr['responseText']
+            statusCode: {
+                401: function (xhr, status, error) {
+                    // browserHistory.push(`${env.dir}/login`)
                 }
-                this.setState({
-                    message: true,
-                    message_type: 'alert alert-danger',
-                    loading: false,
-                    response: response,
-                })
-            }.bind(this),
+            },
+            // error: function (xhr, status, error) {
+            //     let response;
+            //     switch (status) {
+            //         case 400:
+            //             response = xhr['responseJSON']['detail'];
+            //             break;
+            //         case 401:
+            //             console.log('anauthorised')
+            //             browserHistory.push(`${env.dir}/login`);
+            //             break;
+            //         case 500:
+            //             response = error;
+            //             break;
+            //         default:
+            //             response = xhr['responseText']
+            //     }
+            //     this.setState({
+            //         message: true,
+            //         message_type: 'alert alert-danger',
+            //         loading: false,
+            //         response: response,
+            //     })
+            // }.bind(this),
             success: function (res) {
                 this.setState({
                     user: res,
@@ -68,9 +77,10 @@ export default class Menu extends React.Component {
     render() {
         if (this.state.loading)
             return (
-
-                <div className="text-center mt-4">
-                    <ClipLoader color={'#cf2027'} />
+                <div className='container'>
+                    <div className='row justify-content-center'>
+                        <ClipLoader color={'#cf2027'} />
+                    </div>
                 </div>
 
             );
@@ -82,7 +92,18 @@ export default class Menu extends React.Component {
                     {/*Sidebaar*/}
                     <nav className='sidebar'>
                         <div className='navbar-brand'>
-                            <h3>Laravel ERP</h3>
+                            <div className='container-fluid'>
+                                <div className='row align-items-center'>
+                                    <div className='col'>
+                                        <h3>Laravel ERP</h3>
+                                    </div>
+                                    <div className='col-auto min-toggle'>
+                                        <button type='button' id='sidebarCollapse' className='btn btn-default' onClick={this.toggleSidebar}>
+                                            <i className='fas fa-align-left' />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <ul className='list-unstyled components'>

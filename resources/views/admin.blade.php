@@ -17,7 +17,7 @@
     <link href="{{asset("assets/css/app.css") }}" rel="stylesheet" type="text/css">
 </head>
 <body data-gr-c-s-loaded="true">
-<div class="wrapper"  id="app" > </div>
+<div class="d-flex align-items-center border-top border-top-2 wrapper vh-100"  id="app" > </div>
 <script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.slim.min.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/js/bootstrap/bootstrap.bundle.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/js/feather.min.js') }}" ></script>

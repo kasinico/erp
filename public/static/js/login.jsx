@@ -16,7 +16,7 @@ export default class Login extends React.Component {
         localStorage.removeItem('erp_token')
     }
 
-    handleLogin(e) {
+    handleLogin = (e) => {
         e.preventDefault();
         this.setState({processing_form: true, message: false});
         $.ajax({
@@ -51,11 +51,36 @@ export default class Login extends React.Component {
                 browserHistory.push({pathname: `${env.dir}`});
             }.bind(this)
         })
-    }
+    };
+
+    handleNavigation = (path, e) => {
+        e.preventDefault();
+        browserHistory.push(`${env.dir}${path}`);
+    };
+
+    showPassword = (e) => {
+        let x = this.refs.password;
+        x.type = 'text';
+    };
+
+    hidePassword = (e) => {
+        let x = this.refs.password;
+        x.type = 'password';
+    };
 
     render() {
         var button = (
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <React.Fragment>
+                <button className="btn btn-lg btn-block btn-primary mb-3">
+                    Sign in
+                </button>
+
+                <div className="text-center">
+                    <small className="text-muted text-center">
+                        Don't have an account yet? <a href={`${env.dir}/signup`} onClick={this.handleNavigation.bind(this, '/signup')}>Sign up</a>.
+                    </small>
+                </div>
+            </React.Fragment>
         );
         var message = (
             <p />
@@ -71,27 +96,60 @@ export default class Login extends React.Component {
                 </div>
             );
         return (
-            <form className="form-signin" onSubmit={this.handleLogin.bind(this)}>
-                <div className="text-center mb-4">
-                    <h1 className="h3 mb-3 font-weight-normal">Laravel Inventory Management</h1>
-                    <h6>Login to continue</h6>
-                    {message}
-                </div>
+            <div className='container'>
+                <div className='row justify-content-center'>
+                    <div className='col-12 col-md-5 col-xl-4 my-5'>
 
-                <div className="form-label-group">
-                    <input type="email" ref="email" className="form-control" placeholder="Email address"
-                           autoFocus="" />
-                    <label htmlFor="inputEmail">Email address</label>
-                </div>
+                        <h5 className="display-4 text-center mb-3">
+                            Laravel
+                        </h5>
 
-                <div className="form-label-group">
-                    <input type="password" ref="password" className="form-control" placeholder="Password"
-                           autoComplete="new-password" />
-                    <label htmlFor="inputPassword">Password</label>
+                        <p className="text-muted text-center mb-5">
+                            Free access to our dashboard.
+                        </p>
+
+                        <form onSubmit={this.handleLogin}>
+
+                            <div className="form-group">
+                                <label>Email Address</label>
+                                <input type="email" ref='email' className="form-control" placeholder="name@address.com" />
+
+                            </div>
+
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col">
+                                        <label>Password</label>
+                                    </div>
+                                    <div className="col-auto">
+                                        <a href={`${env.dir}/reset-password`} onClick={this.handleNavigation.bind(this, '/reset-password')}
+                                           className="form-text small text-muted">
+                                            Forgot password?
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div className="input-group input-group-merge">
+
+                                    <input type="password" ref='password' className="form-control form-control-appended"
+                                           placeholder="Enter your password" />
+
+                                    <div className="input-group-append">
+                                        <span className="input-group-text" onMouseDown={this.showPassword} onMouseUp={this.hidePassword} onMouseLeave={this.hidePassword}>
+                                            <i className="fa fa-eye" />
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {button}
+
+                        </form>
+
+                    </div>
                 </div>
-                {button}
-                <p className="mt-5 mb-3 text-muted text-center">© 2019</p>
-            </form>
+            </div>
 
         );
     }

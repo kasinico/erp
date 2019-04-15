@@ -1,9 +1,5 @@
-:root {
-    -font-family-sans-serif:"Cerebri Sans",sans-serif;
-}
-
 body {
-    font-family: sans-serif;
+    font-family: "Cerebri Sans",sans-serif;
     font-size: .875rem;
     background-color: #fff !important;
     color: #212529;
@@ -63,8 +59,9 @@ a, a:hover, a:focus {
 
 .sidebar ul li a {
     padding: 8px 16px;
-    /*font: 500 15px "Cerebri Sans",sans-serif;*/
+    font: 500 15px "Cerebri Sans",sans-serif;
     display: block;
+     line-height: 1.5;
 }
 
 .sidebar ul li a .feather {
@@ -175,6 +172,10 @@ a[data-toggle="collapse"] {
 
 .content.active {
     width: 100%;
+}
+
+.sidebar .min-toggle {
+    display: none;
 }
 
 .header {
@@ -305,12 +306,17 @@ h6.text-uppercase {
     }
     .sidebar.active {
         margin-left: 0;
+        width: 100%
+    }
+    .sidebar.active .min-toggle {
+        display: initial;
+    }
+    .sidebar.active .components {
+        padding-left: 40px;
+        font: 500 14px "Cerebri Sans",sans-serif;
     }
     .content {
         width: 100%;
-    }
-    .content.active {
-        width: calc(100% - 200px);
     }
 }
 
