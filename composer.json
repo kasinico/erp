@@ -10,7 +10,8 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "league/fractal": "^0.17.0"
+        "league/fractal": "^0.17.0",
+        "barryvdh/laravel-ide-helper": "^2.6"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
