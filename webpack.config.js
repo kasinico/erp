@@ -62,8 +62,8 @@ module.exports = (env, argv) => {
             new webpack.DefinePlugin({
                 // TODO Edit Production configurations
                 'env': {
-                    'dir': '"/erp/public/admin"',
-                    'public_url': '"http://localhost:8080/erp/public/"',
+                    'dir': '"admin"',
+                    'public_url': '"http://laravel-erp.herokuapp.com"',
                 },
             }),
         );
