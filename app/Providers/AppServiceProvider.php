@@ -13,6 +13,9 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot() {
+        If (env('APP_ENV') !== 'local') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
         Schema::defaultStringLength(255);
 
         //
@@ -26,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->environment() !== 'production') {
-            \URL::forceScheme('https');
 //            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
         //
