@@ -38,7 +38,6 @@ class UserController extends Controller {
                 $response = json_decode((string)$res->getBody());
                 $status_code = $res->getStatusCode();
             } catch (ServerException $exception) {
-                return $exception->getTrace();
                 $response = (string)$exception->getResponse()->getBody();
                 $status_code = $exception->getCode();
             } catch (GuzzleException $exception) {
