@@ -25,27 +25,28 @@ class UserController extends Controller {
 
     public function login() {
         if (request('grant_type') == 'client_credentials' || Auth::attempt(['email' => request('username'), 'password' => request('password')])) {
-            $client = new Client();
-            try {
-                $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
-            } catch (GuzzleException $e) {
-                return response()->json(json_decode((string)$e->getResponse()->getBody()), $e->getCode());
-            }
-
 //            $client = new Client();
 //            try {
-//                $res = $client->request('post', url('/') . '/oauth/token', ['form_params' => request()->all()]);
-//                $response = json_decode((string)$res->getBody());
-//                $status_code = $res->getStatusCode();
-//            } catch (ServerException $exception) {
-//                $response = (string)$exception->getResponse()->getBody();
-//                $status_code = $exception->getCode();
-//            } catch (GuzzleException $exception) {
-//                $response = json_decode((string)$exception->getResponse()->getBody());
-//                $status_code = $exception->getCode();
+//                $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
+//            } catch (GuzzleException $e) {
+//                return response()->json(json_decode((string)$e->getResponse()->getBody()), $e->getCode());
 //            }
 
-            return response()->json($response, $response->getStatusCode());
+            $client = new Client();
+            try {
+                $res = $client->request('post', url('/') . '/oauth/token', ['form_params' => request()->all()]);
+                return $res;
+                $response = json_decode((string)$res->getBody());
+                $status_code = $res->getStatusCode();
+            } catch (ServerException $exception) {
+                $response = (string)$exception->getResponse()->getBody();
+                $status_code = $exception->getCode();
+            } catch (GuzzleException $exception) {
+                $response = json_decode((string)$exception->getResponse()->getBody());
+                $status_code = $exception->getCode();
+            }
+
+            return response()->json($response, $status_code);
         } else {
             return response()->json(["detail"=>"Invalid credentials"], 400);
         }
