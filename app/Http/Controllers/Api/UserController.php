@@ -36,15 +36,14 @@ class UserController extends Controller {
             try {
                 $res = $client->request('post', url('/') . '/oauth/token', ['form_params' => request()->all()]);
 
-                return $res;
                 $response = json_decode((string)$res->getBody());
                 $status_code = $res->getStatusCode();
             } catch (ServerException $exception) {
                 $response = (string)$exception->getResponse()->getBody();
-                $status_code = $exception->getCode();
+                $status_code = 400;
             } catch (GuzzleException $exception) {
                 $response = json_decode((string)$exception->getResponse()->getBody());
-                $status_code = $exception->getCode();
+                $status_code = 401;
             }
 
             return response()->json($response, $status_code);
