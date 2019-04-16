@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\TenantResource;
 use App\Models\UserProfile;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -24,14 +25,28 @@ class UserController extends Controller {
 
     public function login() {
         if (request('grant_type') == 'client_credentials' || Auth::attempt(['email' => request('username'), 'password' => request('password')])) {
-            return response('passes', 200);
+//            $client = new Client();
+//            try {
+//                $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
+//            } catch (GuzzleException $e) {
+//                return response()->json(json_decode((string)$e->getResponse()->getBody()), $e->getCode());
+//            }
+
             $client = new Client();
             try {
-                $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
-            } catch (GuzzleException $e) {
-                return response()->json(json_decode((string)$e->getResponse()->getBody()), $e->getCode());
+                $res = $client->request('post', url('/') . '/oauth/token', ['form_params' => request()->all()]);
+
+                $response = json_decode((string)$res->getBody());
+                $status_code = $res->getStatusCode();
+            } catch (ServerException $exception) {
+                $response = (string)$exception->getResponse()->getBody();
+                $status_code = $exception->getCode();
+            } catch (GuzzleException $exception) {
+                $response = json_decode((string)$exception->getResponse()->getBody());
+                $status_code = $exception->getCode();
             }
-            return $response;
+
+            return response()->json($response, $status_code);
         } else {
             return response()->json(["detail"=>"Invalid credentials"], 400);
         }
