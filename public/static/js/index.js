@@ -12,10 +12,11 @@ import EditProduct from './editProduct';
 import EditOrder from "./editOrder";
 import OrdersList from "./ordersList";
 import ProductsList from "./productList";
+import Register from "./register";
 
 
-function requireAuth() {
-    browserHistory.push(`${env.dir}/login`);
+function requireAuth(nextState, replace) {
+    console.log('hhh');
     if (!localStorage.getItem('erp_token')) {
         browserHistory.push(`${env.dir}/login`);
     }
@@ -25,7 +26,8 @@ render(
     (
         <Router history={browserHistory} basename={'/KenyaBuzz/public/home'}>
             <Route path={`${env.dir}/login`} component={Login} />
-            <Route component={Menu} onEnter={requireAuth()}>
+            <Route path={`${env.dir}/signup`} component={Register} />
+            <Route component={Menu} onEnter={requireAuth}>
                 <Route path={`${env.dir}`} component={Home} />
 
                 /* Products */

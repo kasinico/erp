@@ -6,13 +6,14 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            processing_form: false,
             message: false,
-        }
+            processing_form: false}
     }
 
     componentDidMount() {
         document.title = 'Admin Login';
+        if (this.props.location.state !== "undefined")
+            this.setState(this.props.location.state);
         localStorage.removeItem('erp_token')
     }
 
@@ -110,7 +111,7 @@ export default class Login extends React.Component {
                         </p>
 
                         <form onSubmit={this.handleLogin}>
-
+                            {message}
                             <div className="form-group">
                                 <label>Email Address</label>
                                 <input type="email" ref='email' className="form-control" placeholder="name@address.com" />

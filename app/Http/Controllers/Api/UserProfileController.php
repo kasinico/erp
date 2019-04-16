@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\UserResource;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
@@ -31,23 +32,34 @@ class UserProfileController extends Controller {
      */
     public function register() {
         $validator = Validator::make(request()->all(), [
+            'tenant_name' => 'required|unique:tenants,name',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|unique:users,email',
             'phone_number' => 'required',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json($validator->errors(), 400);
         }
+
+        $tenant = new Tenant([
+            'name' => request('tenant_name'),
+            'email' => request('email'),
+            'phone' => request('phone_number'),
+            'address' => request('tenant_address')
+        ]);
+
+        $tenant->save();
 
         $user = new User([
             'name' => '',
             'email' => request('email'),
             'password' => bcrypt(request('password'))
         ]);
+        $user->save();
 
         $profile = new UserProfile([
             'first_name'    => request('first_name'),
@@ -56,6 +68,7 @@ class UserProfileController extends Controller {
             'phone_number'  => request('phone_number'),
             'is_active' => true
         ]);
+        $profile->tenant()->associate($tenant);
         $profile->user()->associate($user);
         $profile->is_super_user = false;
         $profile->save();
