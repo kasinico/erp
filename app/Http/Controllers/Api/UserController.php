@@ -24,6 +24,7 @@ class UserController extends Controller {
 
     public function login() {
         if (request('grant_type') == 'client_credentials' || Auth::attempt(['email' => request('username'), 'password' => request('password')])) {
+            return response('passes', 200);
             $client = new Client();
             try {
                 $response = $client->request('POST', url('/').'/oauth/token', ['form_params' => request()->all()]);
