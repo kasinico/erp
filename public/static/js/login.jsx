@@ -19,9 +19,10 @@ export default class Login extends React.Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        this.setState({processing_form: true, message: false});
+        // this.setState({processing_form: true, message: false});
         $.ajax({
-            url: `${env.public_url}api/login`,
+            // url: `${env.public_url}api/login`,
+            url: `${env.public_url}oauth/token`,
             dataType: 'json',
             method: 'post',
             data: {
@@ -35,7 +36,7 @@ export default class Login extends React.Component {
                 var response = error;
                 switch (xhr.status) {
                     case 500:
-                        response = xhr['responseJSON']['message']
+                        response = xhr['responseJSON']['message'];
                         break;
                     default:
                         response = xhr['responseJSON']['detail'];
