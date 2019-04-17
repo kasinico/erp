@@ -35,7 +35,7 @@ class UserController extends Controller {
             $client = new Client();
             try {
                 $res = $client->request('post', url('/') . '/oauth/token', ['form_params' => request()->all()]);
-                $response = json_decode((string)$res->getBody());
+                $response = ((string)$res->getBody());
                 $status_code = $res->getStatusCode();
             } catch (ServerException $exception) {
                 $response = (string)$exception->getResponse()->getBody();
