@@ -26,6 +26,7 @@ render(
     (
         <Router history={browserHistory} basename={'/KenyaBuzz/public/home'}>
             <Route path={`${env.dir}/login`} component={Login} />
+            <Route path={`/erp/public/admin`} component={Login} />
             <Route path={`${env.dir}/signup`} component={Register} />
             <Route component={Menu} onEnter={requireAuth}>
                 <Route path={`${env.dir}`} component={Home} />

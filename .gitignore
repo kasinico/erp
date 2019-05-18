@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /vendor
+/packages/dennismwagiru
 /.idea
 /.vagrant
 Homestead.json

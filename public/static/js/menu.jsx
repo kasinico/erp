@@ -20,7 +20,7 @@ export default class Menu extends React.Component {
 
     fetchUser() {
         $.ajax({
-            url: `${env.public_url}api/self`,
+            url: `${window.location.origin}/api/self`,
             method: 'get',
             dataType: 'json',
             headers: {
@@ -69,10 +69,13 @@ export default class Menu extends React.Component {
 
     };
 
-    static handleNavigation(path, e) {
+    handleNavigation = (path, e) => {
         e.preventDefault();
+        if (path === 'login') {
+            localStorage.removeItem('erp_token');
+        }
         browserHistory.push(`${env.dir}${path}`)
-    }
+    };
 
     render() {
         if (this.state.loading)
@@ -108,56 +111,67 @@ export default class Menu extends React.Component {
 
                         <ul className='list-unstyled components'>
                             <li>
-                                <a href={`${env.dir}`} onClick={Menu.handleNavigation.bind(this, '')}>
-                                    <i data-feather="home" />Dashboard
+                                <a href={`${env.dir}`} onClick={this.handleNavigation.bind(this, '')}>
+                                    <i className='fa fa-home' /> Dashboard
                                 </a>
                             </li>
                             <li>
-                                <a href={`${env.dir}/orders`} onClick={Menu.handleNavigation.bind(this, '/orders')}>
-                                    <i data-feather='file' /> Orders
+                                <a href={`${env.dir}/orders`} onClick={this.handleNavigation.bind(this, '/orders')}>
+                                    <i className='fa fa-shopping-cart' /> Orders
                                 </a>
                             </li>
                             <li>
-                                <a href={`${env.dir}/products`} onClick={Menu.handleNavigation.bind(this, '/products')}>
-                                    <i data-feather='shopping-cart' /> Products
+                                <a href={`${env.dir}/products`} onClick={this.handleNavigation.bind(this, '/products')}>
+                                    <i className='fa fa-warehouse' /> Products
                                 </a>
                             </li>
                             <li>
-                                <a href={`${env.dir}/customers`} onClick={Menu.handleNavigation.bind(this, '/customers')}>
-                                    <i data-feather='users' /> Customers
+                                <a href={`${env.dir}/customers`} onClick={this.handleNavigation.bind(this, '/customers')}>
+                                    <i className='fa fa-users' /> Customers
                                 </a>
                             </li>
                             <li>
-                                <a href={`${env.dir}/reports`} onClick={Menu.handleNavigation.bind(this, '/reports')}>
-                                    <i data-feather='bar-chart' /> Reports
+                                <a href={`${env.dir}/reports`} onClick={this.handleNavigation.bind(this, '/reports')}>
+                                    <i className='fa fa-book-open' /> Reports
                                 </a>
                             </li>
                             <li>
-                                <a href={`${env.dir}/integrations`} onClick={Menu.handleNavigation.bind(this, '/integrations')}>
-                                    <i data-feather='layers' /> Integrations
+                                <a href={`${env.dir}/integrations`} onClick={this.handleNavigation.bind(this, '/integrations')}>
+                                    <i className='fa fa-layer-group' /> Integrations
                                 </a>
                             </li>
                             <li>
-                                <a href={`#reports`} data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'>Saved Reports</a>
+                                <a href={`#reports`} data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'><i className='fa fa-file-csv' /> Saved Reports</a>
                                 <ul className='collapse list-unstyled' id='reports'>
                                     <li>
                                         <a href={`${env.dir}/reports/monthly/${moment().format('MMMM-Y')}`}
-                                           onClick={Menu.handleNavigation.bind(this, `/reports/monthly/${moment().format('MMMM-Y')}`)}>
+                                           onClick={this.handleNavigation.bind(this, `/reports/monthly/${moment().format('MMMM-Y')}`)}>
                                             <i data-feather='file-text' /> Current month
                                         </a>
                                     </li>
                                     <li>
                                         <a href={`${env.dir}/reports/quarterly/${moment().format('MMMM-Y')}`}
-                                           onClick={Menu.handleNavigation.bind(this, `/reports/quarterly/${moment().format('MMMM-Y')}`)}>
+                                           onClick={this.handleNavigation.bind(this, `/reports/quarterly/${moment().format('MMMM-Y')}`)}>
                                             <i data-feather='file-text' /> Last quarter
                                         </a>
                                     </li>
                                     <li>
                                         <a href={`${env.dir}/reports/yearly/${moment().format('Y')}`}
-                                           onClick={Menu.handleNavigation.bind(this, `/reports/yearly/${moment().format('Y')}`)}>
+                                           onClick={this.handleNavigation.bind(this, `/reports/yearly/${moment().format('Y')}`)}>
                                             <i data-feather='file-text' /> Yearly
                                         </a>
                                     </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href={'#profile'} data-toggle='collapse' aria-expanded='false' className='dropdown-toggle'><i className='fa fa-user' /> User </a>
+                                <ul className='collapse list-unstyled' id='profile'>
+                                    <li>
+                                        <a href={`${env.dir}/user/profile`}
+                                           onClick={this.handleNavigation.bind(this, '/user/profile')}><i className='fa fa-user-tie' /> Profile </a>
+                                    </li>
+                                    <li>
+                                        <a href={`${env.dir}/login`} onClick={this.handleNavigation.bind(this, '/login')}><i className='fa fa-user-lock' /> Logout </a></li>
                                 </ul>
                             </li>
                         </ul>

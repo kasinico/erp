@@ -23,7 +23,7 @@
 <script type="text/javascript" src="{{ asset('assets/js/feather.min.js', App::environment() == 'production') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/js/app.js', App::environment() == 'production') }}"></script>
 
-<script type="text/javascript" src="{{ asset('static/bundles/admin.js', true) }}" ></script>
+<script type="text/javascript" src="{{ asset('static/bundles/admin.js', App::environment() == 'production') }}" ></script>
 <script>
     feather.replace()
 </script>

@@ -181,6 +181,7 @@ return [
          * Other Service Providers...
          */
         Laravel\Passport\PassportServiceProvider::class,
+        \Dennismwagiru\PassportReact\PassportReactServiceProvider::class
 //        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],

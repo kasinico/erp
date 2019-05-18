@@ -35,7 +35,7 @@ export default class Register extends React.Component {
         this.setState({processing_form: true, message: true});
         let formData = new FormData($('form#signup')[0]);
         $.ajax({
-            url: `${env.public_url}api/register`,
+            url: `${window.location.origin}/api/register`,
             dataType: 'json',
             method: 'post',
             data: formData,
@@ -109,63 +109,60 @@ export default class Register extends React.Component {
             );
 
         return (
+            <div className="register">
             <div className='container'>
                 <div className='justify-content-center'>
                     <div className='card'>
-                        <div className='header mt-md-1'>
-                            <div className='container-fluid'>
-                                <div className='header-body'>
-                                    <div className='row align-items-center'>
-                                        <div className='col'>
-                                            <h6 className="header-pretitle">Free Access To Our Dashboard</h6>
-                                            <h1 className='header-title'>Register</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div className='card-body'>
                             <div className='row align-items-center'>
                                 <div className='container-fluid'>
+                                    <div className='header-body'>
+                                        <div className='row align-items-center'>
+                                            <div className='col'>
+                                                <h6 className="header-pretitle">Free Access To Our Dashboard</h6>
+                                                <h1 className='header-title'>Register</h1>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {message}
 
-                                    <form onSubmit={this.handleSubmit} id='signup'>
+                                    <form onSubmit={this.handleSubmit} id='signup' autoComplete={false}>
 
                                         <div className='row'>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>Organization Name</label>
                                                 <input type='text' name='tenant_name' className='form-control'/>
                                             </div>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>Address</label>
                                                 <input type='text' name='tenant_address' className='form-control'/>
                                             </div>
                                         </div>
 
                                         <div className='row'>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>First Name</label>
                                                 <input type='text' name='first_name' className='form-control'/>
                                             </div>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>Last Name</label>
                                                 <input type='text' name='last_name' className='form-control'/>
                                             </div>
                                         </div>
 
                                         <div className='row'>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>Phone Number</label>
                                                 <input type="text" name='phone_number' className="form-control" />
                                             </div>
-                                            <div className='col-6 form-group'>
+                                            <div className='col-md-6 form-group'>
                                                 <label>Email Address</label>
                                                 <input type='email' name='email' className='form-control' />
                                             </div>
                                         </div>
 
                                         <div className='row'>
-                                            <div className="col-6 form-group">
+                                            <div className="col-md-6 form-group">
                                                 <label>Password</label>
                                                 <div className="input-group input-group-merge">
                                                     <input type="password" name='password' id='password' className="form-control form-control-appended"/>
@@ -178,7 +175,7 @@ export default class Register extends React.Component {
                                                 </div>
                                             </div>
 
-                                            <div className="col-6 form-group">
+                                            <div className="col-md-6 form-group">
                                                 <label>Confirm Password</label>
                                                 <div className="input-group input-group-merge">
                                                     <input type="password" name='confirm_password' id='confirm_password' className="form-control form-control-appended"/>
@@ -201,6 +198,7 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
         );

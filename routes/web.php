@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::get('/{path?}', [
     'uses' => function() {return view('admin');},
     'as' => 'admin',
-    'where' => ['path' => '^((?!api).)*$']
+    'where' => ['path' => '^((?!api|passportreact|add|assets).)*$']
 ]);

@@ -19,10 +19,12 @@ export default class Login extends React.Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        // this.setState({processing_form: true, message: false});
+        console.log(`${window.location.origin}/oauth/token`);
+        this.setState({processing_form: true, message: false});
         $.ajax({
-            // url: `${env.public_url}api/login`,
-            url: `${env.public_url}oauth/token`,
+            // url: `${window.location.origin}/erp/public/api/login`,
+            // url: `${window.location.origin}/api/login`,
+            url: `http://127.0.0.1:8000/oauth/token`,
             dataType: 'json',
             method: 'post',
             data: {
@@ -38,8 +40,14 @@ export default class Login extends React.Component {
                     case 500:
                         response = xhr['responseJSON']['message'];
                         break;
+                    case 400:
+                        response = xhr['responseJSON']['message'];
+                        break;
+                    case 401:
+                        response = xhr['responseJSON']['message'];
+                        break;
                     default:
-                        response = xhr['responseJSON']['detail'];
+                        response = xhr['responseText'];
                 }
                 this.setState({
                     message: true,
@@ -93,7 +101,7 @@ export default class Login extends React.Component {
             );
         if (this.state.message)
             message = (
-                <div className={this.state.message_type}>
+                <div className={`${this.state.message_type} text-center`}>
                     <p>{this.state.response}</p>
                 </div>
             );
@@ -111,11 +119,11 @@ export default class Login extends React.Component {
                             Free access to our dashboard.
                         </p>
 
-                        <form onSubmit={this.handleLogin}>
+                        <form onSubmit={this.handleLogin} >
                             {message}
                             <div className="form-group">
                                 <label>Email Address</label>
-                                <input type="email" ref='email' className="form-control" placeholder="name@address.com" />
+                                <input type="email" ref='email' name='email' className="form-control" placeholder="name@address.com" />
 
                             </div>
 
@@ -134,7 +142,7 @@ export default class Login extends React.Component {
                                 </div>
                                 <div className="input-group input-group-merge">
 
-                                    <input type="password" ref='password' className="form-control form-control-appended"
+                                    <input type="password" ref='password' name='password' className="form-control form-control-appended"
                                            placeholder="Enter your password" />
 
                                     <div className="input-group-append">
