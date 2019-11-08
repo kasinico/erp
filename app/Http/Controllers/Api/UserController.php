@@ -41,7 +41,7 @@ class UserController extends Controller {
                 $status_code = $exception->getCode();
             }
 
-            return response()->json($response, $status_code);
+            return response()->json($response, 200);
         } else {
             return response()->json(["message"=>"Invalid credentials"], 400);
         }
